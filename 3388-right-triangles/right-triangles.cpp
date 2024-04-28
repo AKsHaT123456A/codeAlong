@@ -4,8 +4,8 @@ using namespace std;
 class Solution {
 public:
     long long numberOfRightTriangles(vector<vector<int>>& grid) {
-        int n = grid[0].size(); // Width
-        int m = grid.size();    // Height
+        int n = grid[0].size();
+        int m = grid.size();  
 
         vector<int> rowSum(m, 0);
         vector<int> columnSum(n, 0);
