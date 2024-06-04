@@ -4,16 +4,12 @@ public:
         map<char, int> palind;
         int ans = 0;
         int odd = 0;
-        if (s.size() == 1) return 1;
         for (auto i : s) {
             palind[i]++;
+            ans += (palind[i] % 2 == 0) ? 2 : 0; 
+            if (palind[i] % 2 != 0) odd++; 
+            else odd--; 
         }
-        for (auto i : palind) {
-            ans += (i.second / 2) * 2;
-            if (i.second % 2 != 0) {
-                odd++;
-            }
-        }
-        return ans + (odd > 0 ? 1 : 0);
+        return ans + (odd > 0 ? 1 : 0); 
     }
 };
