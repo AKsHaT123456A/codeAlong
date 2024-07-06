@@ -1,9 +1,9 @@
 class Solution {
-    vector<vector<int>> ans;
 
 public:
-    void combination(int i, int target, vector<int>& candidates,vector<int>& nums) {
-         if (target == 0) {
+    void combination(int i, int target, vector<int>& candidates,
+                     vector<int>& nums, vector<vector<int>>& ans) {
+        if (target == 0) {
             ans.push_back(nums);
             return;
         }
@@ -12,16 +12,17 @@ public:
         }
         if (candidates[i] <= target) {
             nums.push_back(candidates[i]);
-            combination(i, target - candidates[i], candidates, nums);
+            combination(i, target - candidates[i], candidates, nums,ans);
             nums.pop_back();
         }
-        combination(i + 1, target, candidates, nums);
+        combination(i + 1, target, candidates, nums,ans);
     }
 
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<int> nums;
-        combination(0, target, candidates, nums);
+        vector<vector<int>> ans;
+        combination(0, target, candidates, nums, ans);
         return ans;
     }
 };
