@@ -3,11 +3,9 @@ class Solution {
 public:
     void combination(int i, int target, vector<int>& candidates,
                      vector<int>& nums, vector<vector<int>>& ans) {
-        if (target == 0) {
+        if (i==candidates.size()) {
+            if(target==0)
             ans.push_back(nums);
-            return;
-        }
-        if (i == candidates.size() || target < 0) {
             return;
         }
         if (candidates[i] <= target) {
