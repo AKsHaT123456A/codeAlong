@@ -10,14 +10,18 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode *nextNode, *prevNode = NULL;
-        while (head) {
-            nextNode = head->next;
-            head->next=prevNode;
-            prevNode = head;
-            head = nextNode;
+    void reverse(ListNode*& head, ListNode* current, ListNode* prev) {
+        if (current == nullptr) {
+            head = prev;
+            return;
         }
-        return prevNode;
+        ListNode* nextNode = current->next;
+        current->next = prev;
+        reverse(head, nextNode, current);
+    }
+
+    ListNode* reverseList(ListNode* head) {
+        reverse(head, head, nullptr);
+        return head;
     }
 };
