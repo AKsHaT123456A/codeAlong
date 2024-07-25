@@ -12,19 +12,23 @@
  */
 class Solution {
 public:
-    void inOrderTraversal(TreeNode* root, int k, vector<int>& arr) {
-        if (!root || arr.size() >= k) 
+    void inOrderTraversal(TreeNode* &root, int &k, int &cnt, int& ans) {
+        if (!root || cnt >= k)
             return;
 
-        inOrderTraversal(root->left, k, arr);
-        if (arr.size() < k) 
-            arr.push_back(root->val);
-        inOrderTraversal(root->right, k, arr);
+        inOrderTraversal(root->left, k, cnt, ans);
+        cnt++;
+        if (cnt == k) {
+            ans = root->val;
+            return;
+        }
+        inOrderTraversal(root->right, k, cnt, ans);
     }
-    
-    int kthSmallest(TreeNode* root, int k) { 
-        vector<int> arr;
-        inOrderTraversal(root, k, arr);
-        return arr[k - 1];
+
+    int kthSmallest(TreeNode* root, int k) {
+        int ans = 0;
+        int cnt=0;
+        inOrderTraversal(root, k, cnt, ans);
+        return ans;
     }
 };
