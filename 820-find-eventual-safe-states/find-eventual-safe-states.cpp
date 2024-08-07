@@ -1,5 +1,8 @@
 class Solution {
 public:
+    static bool cmp(int a , int b){
+        return a<b;
+    }
    vector<int> eventualSafeNodes(vector<vector<int>>& G) {
     int N = G.size();
     vector<vector<int>> R(N);
@@ -15,14 +18,12 @@ public:
     while (q.size()) {
         int u = q.front();
         q.pop();
-        safe[u] = 1;
+        ans.push_back(u);
         for (int v : R[u]) {
             if (--outdegree[v] == 0) q.push(v);
         }
     }
-    for (int i = 0; i < N; ++i) {
-        if (safe[i]) ans.push_back(i);
-    }
+    sort(ans.begin(),ans.end(),cmp);
     return ans;
 }
 };
