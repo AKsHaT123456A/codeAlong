@@ -1,15 +1,16 @@
 class Solution {
 public:
+    int robbing(vector<int> &nums,vector<int> &dp,int index){
+        if(index<0)return 0;
+        if(dp[index]!=-1)return dp[index];
+        int rob=nums[index]+robbing(nums,dp,index-2);
+        int not_rob=robbing(nums,dp,index-1);
+        return dp[index]=max(rob,not_rob);
+    }
     int rob(vector<int>& nums) {
-        if (nums.size() == 0)
-            return 0;
-        int prev1 = 0;
-        int prev2 = 0;
-        for (int num : nums) {
-            int tmp = prev1;
-            prev1 = max(prev2 + num, prev1);
-            prev2 = tmp;
-        }
-        return prev1;
+        int n=nums.size();
+        vector<int>dp(n+1,-1);
+        robbing(nums,dp,n-1);
+        return dp[n-1];
     }
 };
